@@ -1,0 +1,19 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${AGENT_DB_URL:jdbc:h2:file:./.agentscope/state/agentscope-demo;AUTO_SERVER=TRUE}
+    driver-class-name: org.h2.Driver
+    username: ${AGENT_DB_USER:sa}
+    password: ${AGENT_DB_PASSWORD:}
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:false}
+
+agent:
+  name: ${AGENT_NAME:dev-team-agent}
+  model: ${AGENT_MODEL:qwen3.6-plus-2026-04-02}
+  api-key: "${AGENT_API_KEY:${DASHSCOPE_API_KEY:}}"
+  workspace: ${AGENT_WORKSPACE:.agentscope/workspace}
+  max-iters: ${AGENT_MAX_ITERS:8}

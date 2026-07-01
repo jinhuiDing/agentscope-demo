@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AgentScope 本地开发代理</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="app-shell">
+    <aside class="side-panel">
+        <div>
+            <p class="eyebrow">Local Codex / Claude Lite</p>
+            <h1 id="agent-name">开发团队</h1>
+            <p id="agent-meta" class="meta">正在读取配置</p>
+        </div>
+
+        <div id="team-roles" class="role-list" aria-label="团队角色"></div>
+
+        <div class="control-grid">
+            <label class="field">
+                <span>工作流</span>
+                <select id="workflow-mode">
+                    <option value="full-cycle">完整研发</option>
+                    <option value="analysis-only">只分析方案</option>
+                    <option value="implementation">直接实现</option>
+                    <option value="review-only">只做审查</option>
+                </select>
+            </label>
+            <label class="field">
+                <span>人工介入</span>
+                <select id="intervention-mode">
+                    <option value="checkpoint">关键点确认</option>
+                    <option value="strict">严格确认</option>
+                    <option value="auto">自动执行</option>
+                </select>
+            </label>
+            <label class="field">
+                <span>复杂度</span>
+                <select id="complexity">
+                    <option value="auto">自动判断</option>
+                    <option value="high">复杂需求</option>
+                    <option value="low">简单任务</option>
+                </select>
+            </label>
+        </div>
+
+        <label class="field">
+            <span>用户 ID</span>
+            <input id="user-id" autocomplete="off" value="web-user">
+        </label>
+        <label class="field">
+            <span>会话 ID</span>
+            <input id="session-id" autocomplete="off">
+        </label>
+        <button id="new-session" class="secondary" type="button">新会话</button>
+    </aside>
+
+    <section class="chat-panel">
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="chat-form" class="composer">
+            <textarea id="message-input" rows="3" placeholder="描述任务，例如：实现一个功能、审查当前 diff、跑构建并解释失败原因..." required></textarea>
+            <button id="send-button" type="submit">发送</button>
+        </form>
+    </section>
+
+    <aside class="observe-panel">
+        <div class="observe-head">
+            <div>
+                <p class="eyebrow">Workbench</p>
+                <h2>运行与工作区</h2>
+            </div>
+            <button id="refresh-workbench" class="icon-button" type="button" title="刷新">↻</button>
+        </div>
+        <div class="metrics">
+            <div><strong id="metric-tools">0</strong><span>工具/角色</span></div>
+            <div><strong id="metric-tokens">0</strong><span>Tokens</span></div>
+            <div><strong id="metric-elapsed">0 ms</strong><span>耗时</span></div>
+        </div>
+        <div class="tabs">
+            <button class="tab active" data-tab="timeline" type="button">时间线</button>
+            <button class="tab" data-tab="approvals" type="button">审批</button>
+            <button class="tab" data-tab="repo" type="button">仓库</button>
+        </div>
+        <div id="timeline" class="tab-panel timeline active" aria-label="运行时间线"></div>
+        <div id="approvals" class="tab-panel approvals"></div>
+        <div id="repo-panel" class="tab-panel repo-panel">
+            <div class="repo-actions">
+                <button id="load-status" type="button">Status</button>
+                <button id="load-diff" type="button">Diff</button>
+                <button id="load-tree" type="button">Tree</button>
+            </div>
+            <pre id="repo-output"></pre>
+        </div>
+    </aside>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

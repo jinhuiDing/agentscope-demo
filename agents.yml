@@ -1,0 +1,26 @@
+roles:
+  - id: requirements-analyst
+    name: 需求分析师
+    tools: [read_file, search_repo]
+    maxIters: 6
+    workspace: shared
+  - id: architect
+    name: 架构师
+    tools: [read_file, search_repo, git_diff]
+    maxIters: 6
+    workspace: shared
+  - id: developer
+    name: 编码工程师
+    tools: [read_file, search_repo, write_file, apply_patch, git_diff]
+    maxIters: 8
+    workspace: shared
+  - id: tester
+    name: 测试工程师
+    tools: [run_command, run_test, git_diff]
+    maxIters: 6
+    workspace: shared
+  - id: reviewer
+    name: 代码审查员
+    tools: [read_file, search_repo, git_status, git_diff]
+    maxIters: 6
+    workspace: shared

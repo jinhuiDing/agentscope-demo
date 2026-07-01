@@ -1,0 +1,34 @@
+mode: ask
+paths:
+  allow:
+    - src/**
+    - README.md
+    - AGENTS.md
+    - agent-policy.yml
+    - agents.yml
+    - pom.xml
+  deny:
+    - .git/**
+    - .env
+    - .env.*
+    - target/**
+    - .agentscope/state/**
+commands:
+  allow:
+    - mvn -q -DskipTests package
+    - node --check src/main/resources/static/app.js
+    - git status --short
+    - git diff
+  ask:
+    - git commit
+    - git checkout
+    - git switch
+    - mvn test
+  deny:
+    - rm
+    - del
+    - Remove-Item
+    - git reset
+    - git clean
+    - curl
+    - wget
